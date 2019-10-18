@@ -11,13 +11,16 @@
                 <router-link to="/style-layer">Style feature layer</router-link>
             </li>
             <li>
+                <router-link to="/popup">Popup</router-link>
+            </li>
+            <li>
                 <router-link to="/query-layer-server">Query feature layer on server</router-link>
             </li>
             <li>
                 <router-link to="/query-layer-client">Query feature layer on client</router-link>
             </li>
             <li>
-                <router-link to="/popup">Popup</router-link>
+                <router-link to="/filter-layer">Filter feature layer</router-link>
             </li>
         </ul>
     </div>
