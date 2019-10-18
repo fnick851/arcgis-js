@@ -5,13 +5,24 @@
                 <router-link to="/base">Basemap with toggles</router-link>
             </li>
             <li>
-                <router-link to="/layer">Simple layer</router-link>
+                <router-link to="/layer">Simple feature layer</router-link>
+            </li>
+            <li>
+                <router-link to="/style-layer">Style feature layer</router-link>
+            </li>
+            <li>
+                <router-link to="/query-layer-server">Query feature layer on server</router-link>
+            </li>
+            <li>
+                <router-link to="/query-layer-client">Query feature layer on client</router-link>
+            </li>
+            <li>
+                <router-link to="/popup">Popup</router-link>
             </li>
         </ul>
     </div>
 </template>
 
-<script>
 export default {
     name: 'Home'
 }
