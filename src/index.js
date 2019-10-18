@@ -9,6 +9,7 @@ import Popup from "./Popup"
 import QueryLayer from "./QueryLayer"
 import QueryLayerClient from "./QueryLayerClient"
 import FilterLayer from "./FilterLayer"
+import FilterLayerPolygon from "./FilterLayerPolygon"
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,8 @@ const router = new VueRouter({
         { path: "/popup", component: Popup },
         { path: "/query-layer-server", component: QueryLayer },
         { path: "/query-layer-client", component: QueryLayerClient },
-        { path: "/filter-layer", component: FilterLayer }
+        { path: "/filter-layer", component: FilterLayer },
+        { path: "/filter-layer2", component: FilterLayerPolygon }
     ]
 })
 
