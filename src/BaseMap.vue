@@ -6,7 +6,7 @@
 import { loadModules } from 'esri-loader'
 
 export default {
-    name: 'Map',
+    name: 'BaseMap',
     data() {
         return {
             view: null

@@ -1,7 +1,22 @@
 import Vue from "vue"
-import Map from "./Map"
+import VueRouter from "vue-router"
+import App from "./App"
+import Home from "./Home"
+import BaseMap from "./BaseMap"
+import SimpleLayer from "./SimpleLayer"
+
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+    routes: [
+        { path: "/", component: Home },
+        { path: "/base", component: BaseMap },
+        { path: "/layer", component: SimpleLayer }
+    ]
+})
 
 new Vue({
     el: "#app",
-    render: h => h(Map)
+    router,
+    render: h => h(App)
 })
