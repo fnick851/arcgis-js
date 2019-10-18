@@ -67,10 +67,7 @@ export default {
         };
 
         const arcadeExpression = `
-            var associate_degree = $feature.Associate_s_degree;
-            var master_degree = $feature.Master_s_degree;
-            var total = associate_degree + master_degree
-            return total
+            return ($feature.Public__4_year_or_above + $feature.Private_not_for_profit__4_year_)
         `
 
         const renderer = {
@@ -95,27 +92,27 @@ export default {
             classBreakInfos: [
                 {
                     minValue: 0,
-                    maxValue: 1000,
+                    maxValue: 10000,
                     symbol: less35,
-                    label: "0 1000"
+                    label: "0 10000"
                 },
                 {
-                    minValue: 1001,
-                    maxValue: 3000,
+                    minValue: 10001,
+                    maxValue: 50000,
                     symbol: less50,
-                    label: "1001 3000"
+                    label: "10001 50000"
                 },
                 {
-                    minValue: 3001,
-                    maxValue: 6000,
+                    minValue: 50001,
+                    maxValue: 149999,
                     symbol: more50,
-                    label: "3001 6000"
+                    label: "50001 149999"
                 },
                 {
-                    minValue: 6001,
-                    maxValue: 80000,
+                    minValue: 150000,
+                    maxValue: 400000,
                     symbol: more75,
-                    label: "6001 80000"
+                    label: "150000 400000"
                 }
             ]
         };
@@ -123,11 +120,11 @@ export default {
         const featureLayer = new FeatureLayer({
             url:
                 "https://services6.arcgis.com/Wwv1InPxRQv6NCzu/ArcGIS/rest/services/WIOA_Public__2_year/FeatureServer/0",
-            title: "associate plus master degrees",
+            title: "Sum of Public 4 year and Private non profit 4 year",
             renderer: renderer,
             popupTemplate: {
                 // autocast as esri/PopupTemplate
-                title: "Fields",
+                title: "Sum of multiple fields: {expression/sum-arcade}",
                 expressionInfos: {
                     name: "sum-arcade",
                     title: "sum of multiple fields",
@@ -138,7 +135,7 @@ export default {
                         {
                             type: "text",
                             text:
-                                "Master: {Master_s_degree}, Associate: {Associate_s_degree}, Arcade: {expression/sum-arcade}"
+                                "Public 4 year: {Public__4_year_or_above}, Private nonprofit 4 year: {Private_not_for_profit__4_year_}, Sum: {expression/sum-arcade}"
                         }
                     ]
             },
