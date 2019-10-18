@@ -30,9 +30,7 @@ const config = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            template: require("html-webpack-template"),
-            inject: false,
-            appMountId: "app"
+            template: "src/index.html"
         })
     ],
     optimization: {
