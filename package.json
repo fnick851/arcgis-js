@@ -1,0 +1,33 @@
+{
+    "name": "empty-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "scripts": {
+        "clean": "rimraf dist",
+        "dev": "webpack-dev-server",
+        "build": "npm run clean && webpack -p --mode production"
+    },
+    "dependencies": {
+        "vue": "^2.6.10"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.6.4",
+        "@babel/preset-env": "^7.6.3",
+        "babel-loader": "^8.0.6",
+        "css-loader": "^3.0.0",
+        "file-loader": "^4.0.0",
+        "html-webpack-plugin": "^3.2.0",
+        "html-webpack-template": "^6.2.0",
+        "prettier": "^1.18.2",
+        "rimraf": "^3.0.0",
+        "vue-loader": "^15.7.0",
+        "vue-template-compiler": "^2.6.10",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.9",
+        "webpack-dev-server": "^3.8.2"
+    }
+}
