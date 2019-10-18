@@ -25,6 +25,9 @@
             <li>
                 <router-link to="/filter-layer2">Filter map feature</router-link>
             </li>
+            <li>
+                <router-link to="/arcade">Arcade expression</router-link>
+            </li>
         </ul>
     </div>
 </template>
