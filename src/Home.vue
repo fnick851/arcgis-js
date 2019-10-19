@@ -40,6 +40,9 @@
             <li>
                 <router-link to="/three-d">Add layers to 3D scene</router-link>
             </li>
+            <li>
+                <router-link to="/web-scene">Web scene</router-link>
+            </li>
         </ul>
     </div>
 </template>
