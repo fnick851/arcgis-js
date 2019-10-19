@@ -31,6 +31,9 @@
             <li>
                 <router-link to="/portal-item">Portal item</router-link>
             </li>
+            <li>
+                <router-link to="/styled-vector">Styled vector base map</router-link>
+            </li>
         </ul>
     </div>
 </template>

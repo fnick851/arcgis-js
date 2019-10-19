@@ -12,6 +12,7 @@ import FilterLayer from "./FilterLayer"
 import FilterLayerPolygon from "./FilterLayerPolygon"
 import Arcade from "./Arcade"
 import PortalItem from "./PortalItem"
+import StyledVectorBase from "./StyledVectorBase"
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,8 @@ const router = new VueRouter({
         { path: "/filter-layer", component: FilterLayer },
         { path: "/filter-layer2", component: FilterLayerPolygon },
         { path: "/arcade", component: Arcade },
-        { path: "/portal-item", component: PortalItem }
+        { path: "/portal-item", component: PortalItem },
+        { path: "/styled-vector", component: StyledVectorBase }
     ]
 })
 
