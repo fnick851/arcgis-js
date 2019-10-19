@@ -1,5 +1,19 @@
 <template>
-    <div></div>
+    <div class="root">
+        <form class="checkbox-form">
+            <div v-for="fieldName in fieldNames" :key="fieldName">
+                <input
+                    type="checkbox"
+                    :id="fieldName"
+                    :value="fieldName"
+                    v-model="checkedFields"
+                    @change="renderLayer()"
+                />
+                <label :for="fieldName">{{fieldName}}</label>
+            </div>
+        </form>
+        <div ref="map"></div>
+    </div>
 </template>
 
 <script>
@@ -9,7 +23,11 @@ export default {
     name: 'Arcade',
     data() {
         return {
-            view: null
+            view: null,
+            map: null,
+            layer: null,
+            fieldNames: [],
+            checkedFields: []
         }
     },
     async mounted() {
@@ -18,68 +36,82 @@ export default {
             Map,
             MapView,
             FeatureLayer,
-            Legend
+            Legend,
+            sizeRendererCreator
         ] = await loadModules([
             "esri/Map",
             "esri/views/MapView",
             "esri/layers/FeatureLayer",
-            "esri/widgets/Legend"
+            "esri/widgets/Legend",
+            "esri/renderers/smartMapping/creators/size"
         ], { css: true })
 
-        const less35 = {
-            type: "simple-fill", // autocasts as new SimpleFillSymbol()
-            color: "#fffcd4",
-            style: "solid",
-            outline: {
-                width: 0.2,
-                color: [255, 255, 255, 0.5]
+        this.sizeRendererCreator = sizeRendererCreator
+        this.FeatureLayer = FeatureLayer
+
+        this.map = new Map({
+            basemap: "gray",
+        });
+
+        this.view = new MapView({
+            container: this.$refs.map,
+            map: this.map,
+            center: [-120, 45],
+            zoom: 4
+        })
+
+        this.layer = new FeatureLayer({
+            url: "https://services6.arcgis.com/Wwv1InPxRQv6NCzu/ArcGIS/rest/services/WIOA_Public__2_year/FeatureServer/0",
+            title: "Total value of all selected layers"
+        });
+
+        this.view.ui.add(new Legend({
+            view: this.view
+        }), "bottom-left")
+
+        this.constructFieldsList()
+    },
+    methods: {
+        async constructFieldsList() {
+            const layer = await new this.FeatureLayer({
+                url: "https://services6.arcgis.com/Wwv1InPxRQv6NCzu/ArcGIS/rest/services/WIOA_Public__2_year/FeatureServer/0"
+            }).load()
+            for (let field of layer.fields) {
+                this.fieldNames.push(field.name)
             }
-        };
-
-        const less50 = {
-            type: "simple-fill", // autocasts as new SimpleFillSymbol()
-            color: "#b1cdc2",
-            style: "solid",
-            outline: {
-                width: 0.2,
-                color: [255, 255, 255, 0.5]
+        },
+        renderLayer() {
+            this.map.removeAll()
+            this.constructLayer(this.checkedFields)
+        },
+        async constructLayer(fields) {
+            let popupContent = '<ul>'
+            let arcadeExpression = "return ("
+            for (let field of fields) {
+                arcadeExpression += `$feature.${field} +`
+                popupContent += `
+                    <li><strong>${field}:</strong> {${field}}</li>
+                `
             }
-        };
+            arcadeExpression += "0)"
+            popupContent += '</ul>'
 
-        const more50 = {
-            type: "simple-fill", // autocasts as new SimpleFillSymbol()
-            color: "#38627a",
-            style: "solid",
-            outline: {
-                width: 0.2,
-                color: [255, 255, 255, 0.5]
+            this.layer.popupTemplate = {
+                content: popupContent
             }
-        };
 
-        const more75 = {
-            type: "simple-fill", // autocasts as new SimpleFillSymbol()
-            color: "#0d2644",
-            style: "solid",
-            outline: {
-                width: 0.2,
-                color: [255, 255, 255, 0.5]
-            }
-        };
+            // visualization based off Arcade expression
+            const sizeParams = {
+                layer: this.layer,
+                classificationMethod: "natural-breaks",
+                valueExpression: arcadeExpression,
+                view: this.view
+            };
 
-        const arcadeExpression = `
-            return ($feature.Public__4_year_or_above + $feature.Private_not_for_profit__4_year_)
-        `
-
-        const renderer = {
-            type: "class-breaks", // autocasts as new ClassBreaksRenderer()
-            // field: "Public__4_year_or_above",
-            // normalizationField: "EDUCBASECY",
-            valueExpression: arcadeExpression,
-            // valueExpressionTitle: 'Sum of associate and master degrees',
-            // legendOptions: {
-            //     title: "associate plus master degrees"
-            // },
-            defaultSymbol: {
+            // when the promise resolves, apply the renderer to the layer
+            const rendererRes = await this.sizeRendererCreator.createClassBreaksRenderer(sizeParams)
+            const renderer = rendererRes.renderer
+            renderer.defaultSymbol = {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
                 color: "black",
                 style: "backward-diagonal",
@@ -87,78 +119,28 @@ export default {
                     width: 0.5,
                     color: [50, 50, 50, 0.6]
                 }
-            },
-            defaultLabel: "no data",
-            classBreakInfos: [
-                {
-                    minValue: 0,
-                    maxValue: 10000,
-                    symbol: less35,
-                    label: "0 10000"
-                },
-                {
-                    minValue: 10001,
-                    maxValue: 50000,
-                    symbol: less50,
-                    label: "10001 50000"
-                },
-                {
-                    minValue: 50001,
-                    maxValue: 149999,
-                    symbol: more50,
-                    label: "50001 149999"
-                },
-                {
-                    minValue: 150000,
-                    maxValue: 400000,
-                    symbol: more75,
-                    label: "150000 400000"
-                }
-            ]
-        };
+            }
+            renderer.defaultLabel = "no data"
+            const colors = ['#edf8fb',
+                '#b2e2e2',
+                '#66c2a4',
+                '#2ca25f',
+                '#006d2c']
+            for (let i = 0; i < renderer.classBreakInfos.length; i++) {
+                renderer.classBreakInfos[i].symbol = {
+                    type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+                    color: colors[i],
+                    style: "solid",
+                    outline: {  // autocasts as new SimpleLineSymbol()
+                        color: "grey",
+                        width: 1
+                    }
+                };
+            }
 
-        const featureLayer = new FeatureLayer({
-            url:
-                "https://services6.arcgis.com/Wwv1InPxRQv6NCzu/ArcGIS/rest/services/WIOA_Public__2_year/FeatureServer/0",
-            title: "Sum of Public 4 year and Private non profit 4 year",
-            renderer: renderer,
-            popupTemplate: {
-                // autocast as esri/PopupTemplate
-                title: "Sum of multiple fields: {expression/sum-arcade}",
-                expressionInfos: {
-                    name: "sum-arcade",
-                    title: "sum of multiple fields",
-                    expression: arcadeExpression
-                },
-                content:
-                    [
-                        {
-                            type: "text",
-                            text:
-                                "Public 4 year: {Public__4_year_or_above}, Private nonprofit 4 year: {Private_not_for_profit__4_year_}, Sum: {expression/sum-arcade}"
-                        }
-                    ]
-            },
-            opacity: 0.7
-        });
-
-        const map = new Map({
-            basemap: "gray",
-            layers: [featureLayer]
-        });
-
-        this.view = new MapView({
-            container: this.$el,
-            map: map,
-            center: [-120, 40],
-            zoom: 4
-        })
-
-        const legend = new Legend({
-            view: this.view
-        });
-
-        this.view.ui.add(legend, "bottom-left");
+            this.layer.renderer = renderer
+            this.map.add(this.layer)
+        }
     },
     beforeDestroy() {
         if (this.view) {
@@ -170,10 +152,26 @@ export default {
 </script>
 
 <style scoped>
-div {
+.root,
+.root >>> .esri-view {
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
+}
+form {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    z-index: 10;
+    background-color: white;
+    padding: 5px;
+    max-height: 400px;
+    overflow: scroll;
+    box-shadow: grey 1px 1px 3px 0px;
+}
+.root >>> ul {
+    list-style: none;
 }
 </style>
