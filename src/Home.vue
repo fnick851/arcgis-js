@@ -46,6 +46,9 @@
             <li>
                 <router-link to="/map-coords">Show map coordinates</router-link>
             </li>
+            <li>
+                <router-link to="/draw-graphic">Draw graphics</router-link>
+            </li>
         </ul>
     </div>
 </template>
