@@ -34,6 +34,9 @@
             <li>
                 <router-link to="/styled-vector">Styled vector base map</router-link>
             </li>
+            <li>
+                <router-link to="/web-map">Web map</router-link>
+            </li>
         </ul>
     </div>
 </template>
