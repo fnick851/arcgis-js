@@ -43,6 +43,9 @@
             <li>
                 <router-link to="/web-scene">Web scene</router-link>
             </li>
+            <li>
+                <router-link to="/map-coords">Show map coordinates</router-link>
+            </li>
         </ul>
     </div>
 </template>

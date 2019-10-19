@@ -16,6 +16,7 @@ import StyledVectorBase from "./StyledVectorBase"
 import WebMap from "./WebMap"
 import ThreeD from "./ThreeD"
 import WebScene from "./WebScene"
+import MapCoords from "./MapCoords"
 
 Vue.use(VueRouter)
 
@@ -35,7 +36,8 @@ const router = new VueRouter({
         { path: "/styled-vector", component: StyledVectorBase },
         { path: "/web-map", component: WebMap },
         { path: "/three-d", component: ThreeD },
-        { path: "/web-scene", component: WebScene }
+        { path: "/web-scene", component: WebScene },
+        { path: "/map-coords", component: MapCoords }
     ]
 })
 
