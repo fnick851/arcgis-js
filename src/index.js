@@ -14,6 +14,7 @@ import Arcade from "./Arcade"
 import PortalItem from "./PortalItem"
 import StyledVectorBase from "./StyledVectorBase"
 import WebMap from "./WebMap"
+import ThreeD from "./ThreeD"
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,8 @@ const router = new VueRouter({
         { path: "/arcade", component: Arcade },
         { path: "/portal-item", component: PortalItem },
         { path: "/styled-vector", component: StyledVectorBase },
-        { path: "/web-map", component: WebMap }
+        { path: "/web-map", component: WebMap },
+        { path: "/three-d", component: ThreeD }
     ]
 })
 

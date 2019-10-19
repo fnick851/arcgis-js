@@ -37,6 +37,9 @@
             <li>
                 <router-link to="/web-map">Web map</router-link>
             </li>
+            <li>
+                <router-link to="/three-d">Add layers to 3D scene</router-link>
+            </li>
         </ul>
     </div>
 </template>
