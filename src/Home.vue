@@ -28,6 +28,9 @@
             <li>
                 <router-link to="/arcade">Arcade expression</router-link>
             </li>
+            <li>
+                <router-link to="/portal-item">Portal item</router-link>
+            </li>
         </ul>
     </div>
 </template>

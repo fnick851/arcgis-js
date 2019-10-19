@@ -11,6 +11,7 @@ import QueryLayerClient from "./QueryLayerClient"
 import FilterLayer from "./FilterLayer"
 import FilterLayerPolygon from "./FilterLayerPolygon"
 import Arcade from "./Arcade"
+import PortalItem from "./PortalItem"
 
 Vue.use(VueRouter)
 
@@ -25,7 +26,8 @@ const router = new VueRouter({
         { path: "/query-layer-client", component: QueryLayerClient },
         { path: "/filter-layer", component: FilterLayer },
         { path: "/filter-layer2", component: FilterLayerPolygon },
-        { path: "/arcade", component: Arcade }
+        { path: "/arcade", component: Arcade },
+        { path: "/portal-item", component: PortalItem }
     ]
 })
 
