@@ -18,6 +18,7 @@ import ThreeD from "./ThreeD"
 import WebScene from "./WebScene"
 import MapCoords from "./MapCoords"
 import DrawGraphic from "./DrawGraphic"
+import DisplayGraphic from "./DisplayGraphic"
 
 Vue.use(VueRouter)
 
@@ -39,7 +40,8 @@ const router = new VueRouter({
         { path: "/three-d", component: ThreeD },
         { path: "/web-scene", component: WebScene },
         { path: "/map-coords", component: MapCoords },
-        { path: "/draw-graphic", component: DrawGraphic }
+        { path: "/draw-graphic", component: DrawGraphic },
+        { path: "/display-graphic", component: DisplayGraphic }
     ]
 })
 
