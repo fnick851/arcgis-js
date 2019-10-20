@@ -70,6 +70,9 @@
             <li>
                 <router-link to="/route">Find optimal route</router-link>
             </li>
+            <li>
+                <router-link to="/drive-time">Get drive time</router-link>
+            </li>
         </ul>
     </div>
 </template>

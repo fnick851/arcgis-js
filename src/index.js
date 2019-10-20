@@ -25,6 +25,7 @@ import Search from "./Search"
 import FindPlaces from "./FindPlaces"
 import Direction from "./Direction"
 import OptimalRoute from "./OptimalRoute"
+import DriveTime from "./DriveTime"
 
 Vue.use(VueRouter)
 
@@ -53,7 +54,8 @@ const router = new VueRouter({
         { path: "/search", component: Search },
         { path: "/find-places", component: FindPlaces },
         { path: "/direction", component: Direction },
-        { path: "/route", component: OptimalRoute }
+        { path: "/route", component: OptimalRoute },
+        { path: "/drive-time", component: DriveTime }
     ]
 })
 
