@@ -52,6 +52,9 @@
             <li>
                 <router-link to="/display-graphic">Display graphics</router-link>
             </li>
+            <li>
+                <router-link to="/track-loc">Track locations</router-link>
+            </li>
         </ul>
     </div>
 </template>

@@ -19,6 +19,7 @@ import WebScene from "./WebScene"
 import MapCoords from "./MapCoords"
 import DrawGraphic from "./DrawGraphic"
 import DisplayGraphic from "./DisplayGraphic"
+import TrackLoc from "./TrackLoc"
 
 Vue.use(VueRouter)
 
@@ -41,7 +42,8 @@ const router = new VueRouter({
         { path: "/web-scene", component: WebScene },
         { path: "/map-coords", component: MapCoords },
         { path: "/draw-graphic", component: DrawGraphic },
-        { path: "/display-graphic", component: DisplayGraphic }
+        { path: "/display-graphic", component: DisplayGraphic },
+        { path: "/track-loc", component: TrackLoc }
     ]
 })
 
