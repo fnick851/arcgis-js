@@ -22,6 +22,7 @@ import DisplayGraphic from "./DisplayGraphic"
 import TrackLoc from "./TrackLoc"
 import BufferIntersect from "./BufferIntersect"
 import Search from "./Search"
+import FindPlaces from "./FindPlaces"
 
 Vue.use(VueRouter)
 
@@ -47,7 +48,8 @@ const router = new VueRouter({
         { path: "/display-graphic", component: DisplayGraphic },
         { path: "/track-loc", component: TrackLoc },
         { path: "/buffer-intersect", component: BufferIntersect },
-        { path: "/search", component: Search }
+        { path: "/search", component: Search },
+        { path: "/find-places", component: FindPlaces }
     ]
 })
 

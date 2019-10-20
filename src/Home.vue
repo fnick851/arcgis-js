@@ -61,6 +61,9 @@
             <li>
                 <router-link to="/search">Search for address</router-link>
             </li>
+            <li>
+                <router-link to="/find-places">Find places</router-link>
+            </li>
         </ul>
     </div>
 </template>
