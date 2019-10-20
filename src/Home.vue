@@ -55,6 +55,9 @@
             <li>
                 <router-link to="/track-loc">Track locations</router-link>
             </li>
+            <li>
+                <router-link to="/buffer-intersect">Buffer and intersect geometry</router-link>
+            </li>
         </ul>
     </div>
 </template>

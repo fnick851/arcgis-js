@@ -20,6 +20,7 @@ import MapCoords from "./MapCoords"
 import DrawGraphic from "./DrawGraphic"
 import DisplayGraphic from "./DisplayGraphic"
 import TrackLoc from "./TrackLoc"
+import BufferIntersect from "./BufferIntersect"
 
 Vue.use(VueRouter)
 
@@ -43,7 +44,8 @@ const router = new VueRouter({
         { path: "/map-coords", component: MapCoords },
         { path: "/draw-graphic", component: DrawGraphic },
         { path: "/display-graphic", component: DisplayGraphic },
-        { path: "/track-loc", component: TrackLoc }
+        { path: "/track-loc", component: TrackLoc },
+        { path: "/buffer-intersect", component: BufferIntersect }
     ]
 })
 
