@@ -58,6 +58,9 @@
             <li>
                 <router-link to="/buffer-intersect">Buffer and intersect geometry</router-link>
             </li>
+            <li>
+                <router-link to="/search">Search for address</router-link>
+            </li>
         </ul>
     </div>
 </template>
