@@ -23,6 +23,8 @@ import TrackLoc from "./TrackLoc"
 import BufferIntersect from "./BufferIntersect"
 import Search from "./Search"
 import FindPlaces from "./FindPlaces"
+import Direction from "./Direction"
+import OptimalRoute from "./OptimalRoute"
 
 Vue.use(VueRouter)
 
@@ -49,7 +51,9 @@ const router = new VueRouter({
         { path: "/track-loc", component: TrackLoc },
         { path: "/buffer-intersect", component: BufferIntersect },
         { path: "/search", component: Search },
-        { path: "/find-places", component: FindPlaces }
+        { path: "/find-places", component: FindPlaces },
+        { path: "/direction", component: Direction },
+        { path: "/route", component: OptimalRoute }
     ]
 })
 

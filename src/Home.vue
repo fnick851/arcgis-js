@@ -64,6 +64,12 @@
             <li>
                 <router-link to="/find-places">Find places</router-link>
             </li>
+            <li>
+                <router-link to="/direction">Navigation and direction</router-link>
+            </li>
+            <li>
+                <router-link to="/route">Find optimal route</router-link>
+            </li>
         </ul>
     </div>
 </template>
